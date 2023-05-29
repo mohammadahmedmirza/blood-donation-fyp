@@ -1,5 +1,6 @@
 const cron = require("node-cron");
 const nodemailer = require("nodemailer");
+const moment = require('moment-timezone');
 const { createPool } = require("mysql");
 const {
   EMAIL_HOST,
@@ -7,6 +8,7 @@ const {
   EMAIL_USER,
   EMAIL_PASS} = require('./Utils/constant')
 
+const localTimezone = process.env.TZ
 const pool = createPool({
   host: "localhost",
   user: "root",
@@ -18,10 +20,9 @@ const pool = createPool({
 
 module.exports = {
   getEmails: async (req, res) => {
-    console.log("hello");
-    let date = new Date().toJSON().slice(0, 10);
+    let date =  moment().tz(localTimezone).format('YYYY-MM-DD');
     console.log(date);
-    const sql = `SELECT  user.email FROM events INNER JOIN user ON events.donor_id = user.id WHERE ABS(DATEDIFF(donation_date, '${date}')) = 4 OR DATEDIFF('${date}', donation_date) = 4`;
+    const sql = `SELECT  user.email FROM events INNER JOIN user ON events.donor_id = user.id WHERE ABS(DATEDIFF(donation_date, '${date}')) = 1 OR DATEDIFF('${date}', donation_date) = 1`;
     pool.query(sql, (err, result, fields) => {
       if (err) {
         console.log(err);
