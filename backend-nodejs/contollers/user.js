@@ -256,9 +256,9 @@ module.exports = {
         })
     },
     getUserAvailability: async(req,res) => {
-        const {id} = req.params;
+        const { id } = req.params;
         const sql = `SELECT * FROM events where donor_id = '${id}' AND status = 'PENDING';
-        SELECT * FROM events where DATEDIFF(donor_availability_date,completion_date) = 30`;
+        SELECT * FROM events where DATEDIFF(donor_availability_date,completion_date) = 30 AND donor_id = ${id}`;
         pool.query(sql,(err,results,fields)=>{
             if(err)
             {

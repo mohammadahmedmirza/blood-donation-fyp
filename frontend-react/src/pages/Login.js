@@ -1,8 +1,8 @@
-import React, { useState , useEffect} from 'react'
+import React, { useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from "../components/Navbar";
-import { message, Spin, Button,  Form, Input, Card,notification  } from 'antd'
-import {LockOutlined, LoginOutlined, UserOutlined, SmileOutlined} from "@ant-design/icons";
+import { Spin, Button,  Form, Input, Card  } from 'antd'
+import {LockOutlined, LoginOutlined, UserOutlined} from "@ant-design/icons";
 import { Alert } from 'antd';
 
 
@@ -13,29 +13,11 @@ const Login = ({url}) => {
     const [showAlert, setShowAlert]= useState(false);
     const [showStatus, setStatusAlert]= useState('');
     const [showMessage, setMessageAlert]= useState('');
-    const [notifications, setNotifications] = useState([]);
-    // const [messageApi, contextHolder] = message.useMessage();
-  const [api, contextHolder] = notification.useNotification();
-// const success = () => {
-//     console.log("hello");
-//     messageApi.open({
-//       type: 'success',
-//       content: 'This is a prompt message for success, and it will disappear in 10 seconds',
-//       duration: 10,
-//     });
-//   };
 
 
-  const openNotification = () => {
-    console.log("hello");
-    api.info({
-      message: "hello",
-      description:
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-    placement:'bottom',
-      duration: 3,
-    });
-  };
+
+
+ 
 
     const onFinish = async (values) => {
         setLoading(true);
@@ -73,10 +55,6 @@ const Login = ({url}) => {
                     navigate(url)
                 }else{
                     
-                    // setMessageAlert(data.msg);
-                    // setStatusAlert("error");
-                    // setShowAlert(true);
-                    // success();
                     navigate('/');
                 }
 
@@ -84,9 +62,6 @@ const Login = ({url}) => {
             }
     };
 
-    // const onFinishFailed = (errorInfo) => {
-    //     console.log('Failed:', errorInfo);
-    // };
 
     const divStyle = {
         margin: 'auto',
@@ -96,16 +71,10 @@ const Login = ({url}) => {
         marginLeft: '37%'
     };
 
-    useEffect(() => {
-        return () => {
-          notifications.forEach((notification) => {
-            notification.close();
-          });
-        };
-      }, [notifications]);
 
-    return (<>
-        {contextHolder}
+
+    return (
+    <>
         <body className="sign-up-body">
             <Header/>
             
@@ -124,7 +93,7 @@ const Login = ({url}) => {
                         }}
                         layout="vertical"
                         onFinish={onFinish}
-                        // onFinishFailed={onFinishFailed}
+       
                         autoComplete="off"
                     >
                         <Form.Item
@@ -161,7 +130,7 @@ const Login = ({url}) => {
                         >
                             {showAlert? <Alert message={showMessage} type={showStatus} />: <div></div>}
 
-                            <Button style={{marginTop: "15px"}} type="primary" htmlType="submit" className="MainButtons" onClick={openNotification} block icon={<LoginOutlined/>}>
+                            <Button style={{marginTop: "15px"}} type="primary" htmlType="submit" className="MainButtons"  block icon={<LoginOutlined/>}>
                                 Log In
                             </Button>
 

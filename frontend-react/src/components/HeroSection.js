@@ -1,6 +1,5 @@
 import React from "react";
 import "../App.css";
-import { Alert } from "antd";
 import "./HeroSection.css";
 import { Link } from "react-router-dom";
 

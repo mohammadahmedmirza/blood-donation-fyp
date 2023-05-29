@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Card, Button, Drawer, Space , notification, Alert} from "antd";
+import { Switch, Card, Button, Drawer, notification, Alert } from "antd";
 import { Link } from "react-router-dom";
 import Header from "../components/Navbar";
 
@@ -10,10 +10,10 @@ function AvailabiltyCheck() {
   const [disable, setDisable] = useState(false);
   const [open, setOpen] = useState(false);
   const [patient, setPatient] = useState([]);
-  const [isBoxChecked, setisChecked] = useState('');
-  const [patientID, setPatientId] = useState('')
-  const [donationDate, setDonationDate] = useState('')
-  const [disableMessage, setDisableMessage] = useState('')
+  const [isBoxChecked, setisChecked] = useState("");
+  const [patientID, setPatientId] = useState("");
+  const [donationDate, setDonationDate] = useState("");
+  const [disableMessage, setDisableMessage] = useState("");
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = (placement, message, description) => {
@@ -34,16 +34,19 @@ function AvailabiltyCheck() {
       );
       const result = await res.json();
       console.log(result);
-      if(result.status === 2){
-        if(result.data[0].length > 0){
-          setDisableMessage('You cannot serach for patient because you are already donate to someone else')
-          setDisable(true)
+      if (result.status === 2) {
+        if (result.data[0].length > 0) {
+          setDisableMessage(
+            "You cannot serach for patient because you are already donate to someone else"
+          );
+          setDisable(true);
         }
-        if(result.data[1].length> 0){
-          setDisableMessage(`You cannot serach for patient because you are already donated to someone else, and your next availability date "${result.data[1][0].donor_availability_date}"`)
-          setDisable(true)
+        if (result.data[1].length > 0) {
+          setDisableMessage(
+            `You cannot serach for patient because you are already donated to someone else, and your next availability date "${result.data[1][0].donor_availability_date}"`
+          );
+          setDisable(true);
         }
-        
       }
     } catch (e) {
       console.log("error", e);
@@ -92,13 +95,13 @@ function AvailabiltyCheck() {
   };
   const onClose = () => {
     setOpen(false);
-    setChecked(false)
+    setChecked(false);
   };
 
-  const handelCheckbox = async(e) => {
+  const handelCheckbox = async (e) => {
     const { value, checked } = e.target;
-    console.log(value,'value', checked,"checked") 
-    if(checked){
+    console.log(value, "value", checked, "checked");
+    if (checked) {
       setisChecked(value);
       try {
         const res = await fetch(
@@ -108,41 +111,39 @@ function AvailabiltyCheck() {
           }
         );
         const result = await res.json();
-        setPatientId(result.data[0].patient_id)
-        setDonationDate(result.data[0].required_date)
+        setPatientId(result.data[0].patient_id);
+        setDonationDate(result.data[0].required_date);
       } catch (e) {
         console.log("error", e);
       }
     } else {
-      setisChecked()
+      setisChecked();
     }
-    
   };
 
-
-  const submitHandle = async(e) => {
+  const submitHandle = async (e) => {
     try {
-      const res = await fetch(
-        `http://127.0.0.1:5000/api/add-event`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            patient_id: patientID,
-            donor_id: userID,
-            donation_date : donationDate,
-            requestID : isBoxChecked
+      const res = await fetch(`http://127.0.0.1:5000/api/add-event`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patient_id: patientID,
+          donor_id: userID,
+          donation_date: donationDate,
+          requestID: isBoxChecked,
         }),
-        }
-      );
+      });
       const result = await res.json();
-      onClose()
-      openNotification('top', "SUCCESS", `Thanks for Donating Blood. You can Donate blood on ${donationDate}`)
-      getAvailability()
+      onClose();
+      openNotification(
+        "top",
+        "SUCCESS",
+        `Thanks for Donating Blood. You can Donate blood on ${donationDate}`
+      );
+      getAvailability();
     } catch (e) {
       console.log("error", e);
     }
-    
   };
 
   const divStyle = {
@@ -172,10 +173,7 @@ function AvailabiltyCheck() {
     getAvailability();
   }, []);
 
-
-
   return (
-    
     <body className="check-event">
       {contextHolder}
       <Header />
@@ -194,23 +192,19 @@ function AvailabiltyCheck() {
           <p style={{ fontWeight: "bold", color: "#fff" }}>Search</p>
           {!disable ? (
             <Switch checked={ischecked} onChange={onChange} />
-          ) : (  
+          ) : (
             <>
-            <Switch checked={false} disabled={true} onChange={onChange} />        
-            </>    
+              <Switch checked={false} disabled={true} onChange={onChange} />
+            </>
           )}
-
         </div>
-        {
-          disable ?  <div className="d-flex justify-content-center m-2">
-          <Alert
-          message={disableMessage}
-          banner
-          type="error"
-          closable
-        />
-            </div> :""
-        }
+        {disable ? (
+          <div className="d-flex justify-content-center m-2">
+            <Alert message={disableMessage} banner type="error" closable />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <Drawer
         title="Available Patients"
@@ -219,24 +213,53 @@ function AvailabiltyCheck() {
         onClose={onClose}
         open={open}
         footer={
-          isBoxChecked ? 
-          <div   className="btn" style={{width:'100%', textAlign:'center', border:'none !important', color:'#fff'} } onClick={submitHandle} >Submit</div>:
-          <div disabled  className="btn" style={{width:'100%', textAlign:'center', border:'none !important', color:'#fff', background:'gray'} } >Submit</div>
+          isBoxChecked ? (
+            <div
+              className="btn"
+              style={{
+                width: "100%",
+                textAlign: "center",
+                border: "none !important",
+                color: "#fff",
+              }}
+              onClick={submitHandle}
+            >
+              Submit
+            </div>
+          ) : (
+            <div
+              disabled
+              className="btn"
+              style={{
+                width: "100%",
+                textAlign: "center",
+                border: "none !important",
+                color: "#fff",
+                background: "gray",
+              }}
+            >
+              Submit
+            </div>
+          )
         }
         footerStyle={
-          isBoxChecked ? 
-          {
-            backgroundColor:"#ff5348",
-            padding:'inherit'
-          } : {
-            padding:'inherit',
-            backgroundColor:"gray"
-          }
+          isBoxChecked
+            ? {
+                backgroundColor: "#ff5348",
+                padding: "inherit",
+              }
+            : {
+                padding: "inherit",
+                backgroundColor: "gray",
+              }
         }
       >
         {patient.map((patientData) => {
           return (
-            <div className="drawer-cards d-flex" style={{ justifyContent: "space-evenly", background:'#ffe8e7' }}>
+            <div
+              className="drawer-cards d-flex"
+              style={{ justifyContent: "space-evenly", background: "#ffe8e7" }}
+            >
               <input
                 type="checkbox"
                 value={patientData.id}
@@ -248,14 +271,20 @@ function AvailabiltyCheck() {
                 bordered={true}
                 style={{
                   width: 300,
-                  border: '#ff7f7fd9 1px solid', 
-                  background:'#ffe8e7',
-                  margin:'20px'
+                  border: "#ff7f7fd9 1px solid",
+                  background: "#ffe8e7",
+                  margin: "20px",
                 }}
               >
-                <p><b>Blood Group :</b>   {patientData.blood_group}</p>
-                <p><b>Required Date :  </b>  {patientData.required_date}</p>
-                <p><b>Units Required : </b> {patientData.unit}</p>
+                <p>
+                  <b>Blood Group :</b> {patientData.blood_group}
+                </p>
+                <p>
+                  <b>Required Date : </b> {patientData.required_date}
+                </p>
+                <p>
+                  <b>Units Required : </b> {patientData.unit}
+                </p>
               </Card>
             </div>
           );

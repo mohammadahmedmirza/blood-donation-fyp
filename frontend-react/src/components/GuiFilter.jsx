@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect,forwardRef, useImperativeHandle  } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect,forwardRef, useImperativeHandle  } from "react";
+
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import ClearTwoToneIcon from '@mui/icons-material/ClearTwoTone';
-import { Globals } from "./DashboardUserBody";
 
-const SearchField = forwardRef((props, ref) =>{
-//   
+
+const SearchField = forwardRef((props, ref) =>{  
 const { placeholder, url, state, setLoader, setInitialpage, data, setFilterState}  = props 
 
   const [keyword, setKeyword] = useState("");
   const [showClearIcon, setShowClearIcon] = useState(false);
-    // const {  setTableloader, setInitialpage } = useContext(Globals);
+    
  
   const search = async (value) => {
     setFilterState(true)
@@ -31,7 +30,7 @@ const { placeholder, url, state, setLoader, setInitialpage, data, setFilterState
           }
         );
         const respnse = await res.json();
-        // setFilterState(true)
+        setFilterState(true)
         setLoader(false)
         state(respnse);
       } catch (e) {
@@ -73,8 +72,8 @@ const { placeholder, url, state, setLoader, setInitialpage, data, setFilterState
   }
 
  useEffect(() => {
-   setInitialpage(0)
- }, [keyword]);
+   setInitialpage(0);
+ }, [ keyword ]);
   return (
     <>
     <div className="searchfilter">

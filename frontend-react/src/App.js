@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "bootstrap/dist/css/bootstrap.css";
-import { BrowserRouter as Router, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import ForgotPassword from "./pages/ForgotPassword";
 import Layout from './pages/Layout';
-import UserLayout from './pages/UserLayout';
-import {message} from "antd";
+
 import Volunteer from './pages/Voluteer';
 import Dashboard from "./pages/Dashboard";
 import DashboardRequests from "./pages/DashboardRequests" 

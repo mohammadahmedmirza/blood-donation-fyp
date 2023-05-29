@@ -2,7 +2,6 @@ import React from 'react'
 import LOGO from '../images/dashlogo.png'
 import {Link, useNavigate } from 'react-router-dom';
 import { Alert } from 'antd'
-// import user from "../../imgs/user.png";
 
 function Header() {     
     const navigate  = useNavigate()

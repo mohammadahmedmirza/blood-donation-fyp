@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import {Space, Table,Tag} from 'antd'
+import {Table,Tag} from 'antd'
 
 
 function DonorEvent() {
@@ -38,7 +38,7 @@ const [donorData, setDonorData] = useState([])
       title: 'Patient Name',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <a>{text}</a>,
+      render: (text) => <p>{text}</p>,
     },
     {
       title: 'Patient Blood Group',
@@ -87,8 +87,7 @@ const [donorData, setDonorData] = useState([])
 
 
 useEffect(() => {
-  getDonorEvent()
-  
+  getDonorEvent();  
  }, []);
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useContext, useState, useRef } from "react";
 import pen from "../images/pen.png";
 import trash from "../images/trash.png";
 import Graypen from "../images/graypen.png";
@@ -33,19 +33,14 @@ function RequestsTable() {
   } = useContext(RequestsGlobals);
   const [deleteUserId, setDeleteUserId] = useState("");
   const [items, setItems] = useState([]);
-  const [query, setQuery] = React.useState("");
   const [isChecked, setisChecked] = useState([]);
-  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  const [showDeleteStatus, setDeleteStatusAlert] = useState(false);
-  const [showDeleteMessage, setDeleteMessageAlert] = useState("");
+ 
   const [showStatus, setStatusAlert] = useState("");
   const [showMessage, setMessageAlert] = useState("");
   const childCompRef = useRef();
   const [editRequest, setEditRequest] = React.useState({});
   const [modalShow, setModalShow] = React.useState(false);
-  const [requestStatus, setRequestStatus] = React.useState("");
   const [bloodgroup, setBloodGroup] = useState("");
-
   const deleteNotification = (placement, message, description) => {
     api.error({
       message,
@@ -65,7 +60,6 @@ function RequestsTable() {
       data();
       const result = await res.json();
       setEditRequest(result.data[0]);
-      setRequestStatus(result.data[0].status);
       setBloodGroup(result.data[0].blood_group);
     } catch (e) {
       console.log("error", e);
@@ -191,9 +185,6 @@ function RequestsTable() {
       }
     );
     const result = await response.json();
-    setShowDeleteAlert(true);
-    setDeleteMessageAlert(result.msg);
-    setDeleteStatusAlert(result.status);
     deleteNotification(
       "top",
       "DELETE Requests",
@@ -203,9 +194,7 @@ function RequestsTable() {
     CardsData();
     setisChecked([]);
   };
-  setTimeout(() => {
-    setShowDeleteAlert(false);
-  }, 5000);
+
 
   return (
     <>
@@ -221,11 +210,6 @@ function RequestsTable() {
             Delete
           </Button>
         }
-        {showDeleteAlert ? (
-          <Alert message={showDeleteMessage} type="error" />
-        ) : (
-          ""
-        )}
 
         <Search
           placeholder={"Search"}

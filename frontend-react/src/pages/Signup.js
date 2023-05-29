@@ -6,7 +6,6 @@ import {
   Form,
   Input,
   Card,
-  notification
 } from "antd";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,9 +15,6 @@ import {
   UserOutlined,
   HomeOutlined,
   LoginOutlined,
-  SmileOutlined
-
-
 } from "@ant-design/icons";
 import { Alert } from "antd";
 import Header from "../components/Navbar";
@@ -28,19 +24,10 @@ const Signup = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [showStatus, setStatusAlert] = useState("");
   const [showMessage, setMessageAlert] = useState(""); 
-  const [api, contextHolder] = notification.useNotification();
+
   const navigate = useNavigate();
  
-  const openNotification = () => {
-    api.open({
-      message:'Notification tilte',
-      description:"hello your are new",
-      placement:'top',
-      icon: (<SmileOutlined  style={{
-        color: '#108ee9',
-      }}/>),
-    })
-  }
+
   
 
   const onFinish = async (values) => {
@@ -70,7 +57,7 @@ const Signup = () => {
           setShowAlert(true);
           console.log("Error in Creating User");
         } else {
-          openNotification()
+          
           navigate("/login");
         }
       } else {
@@ -109,7 +96,6 @@ const Signup = () => {
                 remember: false,
               }}
               onFinish={onFinish}
-              // onFinishFailed={onFinishFailed}
               autoComplete="off"
               layout="vertical"
             >

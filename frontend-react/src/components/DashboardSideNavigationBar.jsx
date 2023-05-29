@@ -51,15 +51,6 @@ function DashboardSideNavigationBar() {
             </span>
           </Link>
         </li>
-        {/* <li>
-          <Link to="/admin/services">
-            <img src={dashboard} alt="..." />
-
-            <span className={`${url === "services" ? "bordered" : ""} `}>
-              services
-            </span>
-          </Link>
-        </li> */}
         
         <li>
           <Link onClick={clearToken}> 

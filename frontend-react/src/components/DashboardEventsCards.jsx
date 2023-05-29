@@ -21,10 +21,6 @@ export default function DashboardEventsCards({ users }) {
                 <CircularProgress style={{ color: "#FF5348" }} />
               </div>
             )}
-            {/* <div>
-                <h6 class="d-flex align-items-center">Total Patients</h6>
-                <p>200</p>
-              </div> */}
           </div>
         </div>
         <div class="col-lg-3">
@@ -43,17 +39,6 @@ export default function DashboardEventsCards({ users }) {
                 <CircularProgress style={{ color: "#FF5348" }} />
               </div>
             )}
-              {/* <div>
-                <h6 class="d-flex align-items-center">
-                  Total Donor
-                </h6>
-                <p>
-                  100
-                </p>
-              </div> */}
-
-              
-
 
           </div>
         </div>
@@ -74,18 +59,6 @@ export default function DashboardEventsCards({ users }) {
                 <CircularProgress style={{ color: "#FF5348" }} />
               </div>
             )}
-              {/* <div>
-                <h6 class="d-flex align-items-center">
-                  Total Requests
-                </h6>
-                <p>
-                  100
-                </p>
-              </div> */}
-
-              
-
-
           </div>
         </div>
         <div class="col-lg-3">
@@ -104,18 +77,6 @@ export default function DashboardEventsCards({ users }) {
                 <CircularProgress style={{ color: "#FF5348" }} />
               </div>
             )}
-              {/* <div>
-                <h6 class="d-flex align-items-center">
-                  Total Events
-                </h6>
-                <p>
-                  100
-                </p>
-              </div> */}
-
-              
-
-
           </div>
         </div>
       </div>

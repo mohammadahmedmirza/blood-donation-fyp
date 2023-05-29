@@ -16,18 +16,12 @@ export default function UserTable() {
   const [modalShow, setModalShow] = React.useState(false);
   const [viewmodalShow, setviewModalShow] = React.useState(false);
   const [viewdata, setviewData] = useState({})
-  const [query, setQuery] = React.useState("");
-  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  const [showDeleteStatus, setDeleteStatusAlert] = useState(false);
-  const [showDeleteMessage, setDeleteMessageAlert] = useState("");
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [editUser, setEditUser] = React.useState({});
   const [showAlert, setShowAlert] = useState(false);
   const [showStatus, setStatusAlert] = useState("");
   const [showMessage, setMessageAlert] = useState("");
   const [userRole, setUserRole] = useState("");
-  const [sorting, setsorting] = useState(false)
-  const [prefrence, setPrefrence] = useState("")
   const [bloodgroup, setBloodGroup] = useState("")
   const [userStatus, setUserStatus] = useState("")
   const childCompRef = useRef();
@@ -45,11 +39,12 @@ export default function UserTable() {
     filterState,
     openNotification,
     api,
-    contextHolder
   } = useContext(Globals);
   const [deleteUserId, setDeleteUserId] = useState("");
   const [items, setItems] = useState([]);
   const [isChecked, setisChecked] = useState([]);
+  const count = allUsers.count;
+  const limit = 10;
 
   const delelteNotification = (placement, message,description) => {
     api.error({
@@ -187,20 +182,12 @@ export default function UserTable() {
       }
     }
   };
-  const count = allUsers.count;
-  const limit = 10;
-  // const filterdData = allUsers.results?.filter((val) =>
-  //   val?.first_name?.toLowerCase()?.includes(query?.toLowerCase())
-  // );
-  // const tableData = filterdData ?? allUsers;
 
   const handlePageClick = (data) => {
     if(!filterState){
       let currentPage = data.selected + 1;
       const commentsFormServer = data1(currentPage, limit);
-  
       setInitialpage(data.selected);
-      // console.log(initialpage)
       setItems(commentsFormServer);
       setisChecked([])
 
@@ -215,7 +202,6 @@ export default function UserTable() {
 
   const handelCheckbox = (e) => {
     const { value, checked } = e.target;
-    console.log(value,'value', checked,"checked")
     if (checked) {
       setisChecked([...isChecked, value], value);
     } else {
@@ -234,17 +220,11 @@ export default function UserTable() {
       }
     );
     const result = await response.json();
-    setShowDeleteAlert(true);
-    setDeleteMessageAlert(result.msg);
-    setDeleteStatusAlert(result.status);
     delelteNotification('top','DELETE User', "Users Deleted Successfully")
     data();
     CardsData();
     setisChecked([]);
   };
-  setTimeout(() => {
-    setShowDeleteAlert(false);
-  }, 7000);
 
 const setUserRoleforTable  = (user) =>{
     if(user === 1){
@@ -269,11 +249,6 @@ const setUserRoleforTable  = (user) =>{
             Delete
           </Button>
         }
-        {/* {showDeleteAlert ? (
-          <Alert message={showDeleteMessage} type="error" />
-        ) : (
-          ""
-        )} */}
         <Search
           placeholder={"Search User by name"}
           url={`http://127.0.0.1:5000/api/search-user?page=1&limit=10`}
