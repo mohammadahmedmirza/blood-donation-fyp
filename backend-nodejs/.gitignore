@@ -1,4 +1,3 @@
 /node_modules
 /Utils/constant.js
-
-.env
+/.env
