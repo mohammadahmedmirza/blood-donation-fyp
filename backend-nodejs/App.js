@@ -52,8 +52,8 @@ app.get("/", (req, res) => {
 
 // cron jobs 
 
-cron.schedule('*/5 * * * * *',   
-  getEmails);
+// cron.schedule('*/5 * * * * *',   
+//   getEmails);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
