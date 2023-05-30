@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 
 // cron jobs 
 
-// cron.schedule('*/5 * * * * *',   
+// cron.schedule('*/30 * * * * *',   
 //   getEmails);
 
 // set port, listen for requests

@@ -28,6 +28,7 @@ const Login = ({url}) => {
         });
 
         const data = await response.json();
+        setLoading(false)
             if(data.status===0)
             {
                 setMessageAlert(data.msg)
@@ -47,7 +48,6 @@ const Login = ({url}) => {
                 localStorage.setItem("user_role", data.data[0].user_role);
                 localStorage.setItem("id", data.data[0].id);
                 localStorage.setItem("account_status", data.data[0].account_status);
-                console.log(data.msg);
                 if(data.data[0].user_role == "1"){
                     setMessageAlert(data.msg);
                     setStatusAlert("error");
