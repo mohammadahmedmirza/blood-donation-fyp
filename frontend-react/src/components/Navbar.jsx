@@ -33,7 +33,7 @@ function Header() {
                     {
                         !currentUserLoginId ? <form className="d-flex">
                         <Link to="/about-us" className="btn-nav-login">About Us</Link>
-                        <Link to="/sign-up" className="btn-nav-login">How It Works</Link>
+                        {/* <Link to="/sign-up" className="btn-nav-login">How It Works</Link> */}
                     </form> : <div class="btn-group signout-user ">
                     
                     
@@ -42,7 +42,7 @@ function Header() {
                     <button className="btn-nav-login mt-2">About Us</button>
                     </Link>
                      <Link to="/check-event">
-                     <button className="btn-nav-login mt-2">How It Works</button>
+                     {/* <button className="btn-nav-login mt-2">How It Works</button> */}
                      </Link>
                      
                      <button className="btn-nav-addlisting mt-2" onClick={clearToken}>LOGOUT</button>  
