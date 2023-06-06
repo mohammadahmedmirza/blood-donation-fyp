@@ -10,6 +10,7 @@ function Header() {
     const account_status = localStorage.getItem("account_status")
 
     const clearToken = () => {
+        window.location.reload();
         localStorage.clear()
         navigate('/')
     }
