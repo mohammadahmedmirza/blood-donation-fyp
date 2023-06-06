@@ -11,7 +11,6 @@ const pool = createPool({
 module.exports = {
     requestBlood: async (req, res) => {
         const { id } = req.params;
-        console.log(id);
         const sql = `INSERT INTO requests (patient_id,unit,blood_group,required_date,status)
         VALUES ('${id}','${req.body.units}','${req.body.blood_group}','${req.body.date}','${req.body.status}')`;
         pool.query(sql, (err, result, fields) => {
@@ -37,10 +36,8 @@ module.exports = {
             }
         })
     },
-    editRequest: async (req, res) => {
-        console.log(req.body);
-        const { id } = req.params;
-        console.log(id);
+    editRequest: async (req, res) => {   
+        const { id } = req.params;    
         const sql = `UPDATE requests SET unit = '${req.body.unit}', blood_group = '${req.body.blood_group}',
         required_date = '${req.body.date}',status = '${req.body.status}' WHERE id = '${id}'`;
         pool.query(sql, (err, results, fields) => {

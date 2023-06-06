@@ -51,7 +51,6 @@ module.exports = {
    
     changeEventStatus:async(req,res)=>{
         const {id} = req.params;
-        // console.log(id);
         let date = new Date().toJSON().slice(0, 10);
         let currentDate = new Date()
         currentDate.setDate(currentDate.getDate() + 30);
@@ -59,8 +58,6 @@ module.exports = {
         var month = String(currentDate.getMonth() + 1).padStart(2, '0');
         var day = String(currentDate.getDate()).padStart(2, '0');
         var formattedDate = year + '-' + month + '-' + day; 
-        console.log(formattedDate);
-        // console.log(nextAvailaiblityDate, "nextAvailaiblityDate");
         const sql = `UPDATE events SET status = 'COMPLETED', completion_date = '${date}', donor_availability_date = '${formattedDate}' WHERE id = ${id} `;
         pool.query(sql,(err,results,fields)=>{
             if(err)
@@ -89,9 +86,7 @@ module.exports = {
                         return res.json({status:1,msg:err});
                     }
                     else{
-                        // console.log(results);
                         remaining_unit = results[0].remaning_unit
-                        console.log(remaining_unit,"hello");
                         const sql = `UPDATE requests SET remaning_unit = ${remaining_unit-1}, status = 'IN-PROGRESS' WHERE id = '${results[0].id}';
                         SELECT id ,remaning_unit FROM requests WHERE id = '${results[0].id}'`;
                         pool.query(sql,(err,results,fields)=>{
@@ -140,7 +135,6 @@ module.exports = {
                 return res.json({status:1,msg:err})
             }
             else if(Object.keys(results).length>0){
-                console.log(results);
                 return res.json({status:2,data:[results[0],results[1],results[2]]});
             }
             else {
