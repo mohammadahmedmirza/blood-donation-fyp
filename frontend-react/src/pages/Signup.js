@@ -33,8 +33,7 @@ const Signup = () => {
   const onFinish = async (values) => {
     values.availability = "not_available";
     values.user_role = "3"
-    values.account_status = "HOLD"
-    console.log("Success:", values);
+    values.account_status = "OK"
     var mailformat = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
     var passw = /^(?=.*[a-z]).{8,15}$/;
     setLoading(true)

@@ -42,6 +42,7 @@ apiRoutes.get('/donor-events/:id',Events.donorEvents);
 apiRoutes.get('/get-all-events',Events.getAllEvents);
 apiRoutes.post('/add-event',Events.addEvents);
 apiRoutes.get('/change-event-status/:id',Events.changeEventStatus);
+
 //Events Controller Ends
 
 module.exports = apiRoutes;

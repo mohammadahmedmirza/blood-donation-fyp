@@ -392,6 +392,9 @@ function RequestsTable() {
                       <option value={"ab-"}>AB-</option>
                       <option value={"b+"}>B+</option>
                       <option value={"a+"}>A+</option>
+                      <option value={"o+"}>O+</option>
+                      <option value={"o-"}>O-</option>
+                      <option value={"b-"}>B-</option>
                     </select>
                   </div>
                 </div>

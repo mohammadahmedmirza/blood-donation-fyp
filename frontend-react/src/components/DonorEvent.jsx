@@ -19,7 +19,7 @@ const [donorData, setDonorData] = useState([])
       setDonorData(
         result.data.map(patient => ({
           name: patient.first_name.toUpperCase() +" "+ patient.last_name.toUpperCase(),
-          blood_group: patient.blood_group.toUpperCase(),
+          blood_group: patient.bloodgroup.toUpperCase(),
           unit: patient.blood_unit,
           date: patient.donation_date,
           tags: [patient.event_status]
@@ -41,7 +41,7 @@ const [donorData, setDonorData] = useState([])
       render: (text) => <p>{text}</p>,
     },
     {
-      title: 'Patient Blood Group',
+      title: 'Requested Blood Group',
       dataIndex: 'blood_group',
       key: 'blood_group',
     },
@@ -95,7 +95,7 @@ useEffect(() => {
           <h2 style={{textAlign:'center'}}>YOUR EVENTS</h2>
     <div style={divStyle}>
 
-    <Table   pagination={false} columns={columns} dataSource={donorData} />;
+    <Table   pagination={false} columns={columns} dataSource={donorData} />
     </div>
     </div>
     

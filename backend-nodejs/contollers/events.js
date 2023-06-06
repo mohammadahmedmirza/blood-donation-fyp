@@ -1,4 +1,7 @@
 const { createPool } = require('mysql')
+const { Curl } = require("node-libcurl");
+// const fetch = require('node-fetch');
+const curlTest = new Curl();
 
 const pool = createPool({
     host: "localhost",
@@ -29,7 +32,7 @@ module.exports = {
     },
     donorEvents:async(req,res)=>{
         const {id} = req.params;
-        const sql = `SELECT events.patient_id,events.status as event_status,events.donation_date,events.blood_unit,user.* 
+        const sql = `SELECT events.patient_id,events.status as event_status,events.donation_date,events.blood_unit,events.blood_group as bloodgroup,user.* 
         FROM events INNER JOIN user ON events.patient_id = user.id WHERE events.donor_id = ${id}`;
         pool.query(sql,(err,results,fields)=>{
             if(err)
@@ -45,6 +48,7 @@ module.exports = {
             }
         })
     },
+   
     changeEventStatus:async(req,res)=>{
         const {id} = req.params;
         // console.log(id);
@@ -71,8 +75,8 @@ module.exports = {
     addEvents:async(req,res)=>{
         
         const sql = `INSERT INTO events 
-        (patient_id,donor_id,donation_date,donation_time,status,blood_unit,completion_date,donor_availability_date)
-        VALUES ('${req.body.patient_id}','${req.body.donor_id}','${req.body.donation_date}','02:00 PM', 'PENDING', '1', NULL, NULL);`;
+        (patient_id,donor_id,donation_date,donation_time,status,blood_unit,completion_date,donor_availability_date, blood_group)
+        VALUES ('${req.body.patient_id}','${req.body.donor_id}','${req.body.donation_date}','02:00 PM', 'PENDING', '1', NULL, NULL, "${req.body.blood_group}");`;
         pool.query(sql,(err,results,fields)=>{
             if(err)
             {

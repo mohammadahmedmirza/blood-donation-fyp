@@ -215,7 +215,7 @@ function DashboardRequestsBody() {
         <Modal.Header className="d-flex justify-content-center color-orange font-family-poppins">
           <img style={{ cursor: "pointer" }} src={pen} alt="..." width="24" />
           <Modal.Title id="contained-modal-title-vcenter">
-            &nbsp; Create User
+            &nbsp; Add Patient Request
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -231,11 +231,14 @@ function DashboardRequestsBody() {
                     onChange={(e) => setBloodGroup(e.target.value)}
                   >
                     <option>Select</option>
-                    <option value={"ab+"}>AB+</option>
-                    <option value={"a-"}>A-</option>
-                    <option value={"ab-"}>AB-</option>
-                    <option value={"b+"}>B+</option>
-                    <option value={"a+"}>A+</option>
+                      <option value={"ab+"}>AB+</option>
+                      <option value={"a-"}>A-</option>
+                      <option value={"ab-"}>AB-</option>
+                      <option value={"b+"}>B+</option>
+                      <option value={"a+"}>A+</option>
+                      <option value={"o+"}>O+</option>
+                      <option value={"o-"}>O-</option>
+                      <option value={"b-"}>B-</option>
                   </select>
                 </div>
               </div>

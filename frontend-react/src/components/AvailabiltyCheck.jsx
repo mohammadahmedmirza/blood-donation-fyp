@@ -21,6 +21,7 @@ function AvailabiltyCheck() {
       message,
       description,
       placement,
+      duration: 15
     });
   };
 
@@ -37,13 +38,13 @@ function AvailabiltyCheck() {
       if (result.status === 2) {
         if (result.data[0].length > 0) {
           setDisableMessage(
-            "You cannot serach for patient because you are already donate to someone else"
+            `Please visit Thalassemia Center 5 days prior to the "${result.data[0][0].donation_date}" for smooth process`
           );
           setDisable(true);
         }
         if (result.data[1].length > 0) {
           setDisableMessage(
-            `You cannot serach for patient because you are already donated to someone else, and your next availability date "${result.data[1][0].donor_availability_date}"`
+            `You cannot serach for patient because you are already donated to someone else, and your next availability date will be "${result.data[1][0].donor_availability_date}"`
           );
           setDisable(true);
         }
@@ -131,6 +132,7 @@ function AvailabiltyCheck() {
           donor_id: userID,
           donation_date: donationDate,
           requestID: isBoxChecked,
+          blood_group: bloodGroup,
         }),
       });
       const result = await res.json();
