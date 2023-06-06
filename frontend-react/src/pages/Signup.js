@@ -54,7 +54,6 @@ const Signup = () => {
           setMessageAlert("Error in Creating User");
           setStatusAlert("error");
           setShowAlert(true);
-          console.log("Error in Creating User");
         } else {
           
           navigate("/login");

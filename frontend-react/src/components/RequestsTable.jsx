@@ -98,7 +98,6 @@ function RequestsTable() {
         );
         data();
         const result = await res.json();
-        console.log(result);
         openNotification("top", "SUCCESS", "Request Updated Successfully");
         setMessageAlert("User updated successfully");
         setStatusAlert("success");

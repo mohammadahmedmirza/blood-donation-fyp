@@ -13,7 +13,6 @@ const { placeholder, url, state, setLoader, setInitialpage, data, setFilterState
  
   const search = async (value) => {
     setFilterState(true)
-      console.log(value);
       setLoader(true)
       setKeyword(value);
       

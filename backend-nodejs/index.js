@@ -21,7 +21,6 @@ const pool = createPool({
 module.exports = {
   getEmails: async (req, res) => {
     let date =  moment().tz(localTimezone).format('YYYY-MM-DD');
-    console.log(date);
     const sql = `SELECT  user.email, user.first_name, user.last_name, events.donation_date FROM events INNER JOIN user ON events.donor_id = user.id WHERE events.status = 'PENDING' AND ABS(DATEDIFF(donation_date, '${date}')) = 1 OR DATEDIFF('${date}', donation_date) = 1`;
     pool.query(sql, (err, result, fields) => {
       if (err) {

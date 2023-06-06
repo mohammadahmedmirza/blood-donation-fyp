@@ -34,7 +34,6 @@ function AvailabiltyCheck() {
         }
       );
       const result = await res.json();
-      console.log(result);
       if (result.status === 2) {
         if (result.data[0].length > 0) {
           setDisableMessage(
@@ -83,8 +82,7 @@ function AvailabiltyCheck() {
           }
         );
         const result = await res.json();
-        setPatient(result.data);
-        console.log(result.data);
+        setPatient(result.data)
         setOpen(true);
       } catch (e) {
         console.log("error", e);
@@ -101,7 +99,6 @@ function AvailabiltyCheck() {
 
   const handelCheckbox = async (e) => {
     const { value, checked } = e.target;
-    console.log(value, "value", checked, "checked");
     if (checked) {
       setisChecked(value);
       try {

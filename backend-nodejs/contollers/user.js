@@ -13,7 +13,6 @@ module.exports = {
         const sql = `SELECT count(*) as patient_count from user WHERE user_role = '2';SELECT count(*) as donor_count from user WHERE user_role = '3';
         SELECT count(*) as total_request FROM requests;SELECT count(*) as total_events FROM events`;
         pool.query(sql, (err, results, fields) => {
-            console.log(results[1][0].donor_count);
             const total_patient = results[0][0].patient_count;
             const total_donor = results[1][0].donor_count;
             const total_request = results[2][0].total_request;
@@ -27,7 +26,6 @@ module.exports = {
         })
     },
     addUser: async (req, res) => {
-        console.log(req.body);
         const user_data = `SELECT * FROM user WHERE email = '${req.body.email}'`;
         pool.query(user_data, (err, result, fields) => {
             if (Object.keys(result).length > 0) {
@@ -216,9 +214,9 @@ module.exports = {
         })
     },
     PatientRequests: async(req,res) => {
-
+        let date = new Date().toJSON().slice(0, 10);
         const sql = `SELECT requests.*,user.first_name,user.last_name FROM requests INNER JOIN user 
-        ON requests.patient_id = user.id WHERE requests.blood_group = '${req.body.blood_group}' AND requests.remaning_unit > 0;`;
+        ON requests.patient_id = user.id WHERE requests.blood_group = '${req.body.blood_group}' AND requests.remaning_unit > 0 AND requests.required_date > '${date}' ;`;
         pool.query(sql,(err,results,fields)=>{
             if(err)
             {

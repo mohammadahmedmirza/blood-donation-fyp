@@ -34,13 +34,13 @@ const Login = ({url}) => {
                 setMessageAlert(data.msg)
                 setStatusAlert("error")
                 setShowAlert(true)
-                console.log(data.msg);
+          
             }
             else if(data.status===1){
                 setMessageAlert(data.msg)
                 setStatusAlert("error")
                 setShowAlert(true)
-                console.log(data.msg);
+           
             }
             else {
                 localStorage.setItem("firstname",data.data[0].first_name);

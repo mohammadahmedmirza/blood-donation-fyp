@@ -114,7 +114,6 @@ export default function DashboardUserBody() {
   };
   const CreateUser = async (e) => {
     e.preventDefault();
-    console.log("user Input: ", userInput);
     var mailformat = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
     if (userInput.first_name === "") {
       setMessageAlert("Please enter first name");
@@ -153,7 +152,6 @@ export default function DashboardUserBody() {
       setStatusAlert("error");
       setShowAlert(true);
     } else {
-      console.log(userInput, "userdata");
       if (userInput.email.match(mailformat)) {
         
           const response = await fetch(
@@ -181,7 +179,6 @@ export default function DashboardUserBody() {
           const respons = await response.json();
           if (respons.status === 0) {
             setMessageAlert(respons.msg);
-            console.log(respons.msg, "Here")
             setStatusAlert("error");
             setShowAlert(true);
           } else if (respons.status === 1) {
